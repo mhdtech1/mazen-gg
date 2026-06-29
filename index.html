@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#08080c" />
+
+<!-- Primary SEO -->
+<title>Mazen Dahroug — Content Creator, Streamer &amp; Gamer</title>
+<meta name="description" content="Official hub for Mazen Dahroug — content creator, streamer and gamer. Follow on YouTube, Twitch, TikTok, Instagram, X and Discord, and watch the latest videos." />
+<meta name="author" content="Mazen Dahroug" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="keywords" content="Mazen Dahroug, mazen.gg, content creator, streamer, gamer, YouTube, Twitch, TikTok, MazenClips" />
+<link rel="canonical" href="https://mazen.gg/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Mazen Dahroug" />
+<meta property="og:title" content="Mazen Dahroug — Content Creator, Streamer &amp; Gamer" />
+<meta property="og:description" content="The official home of Mazen Dahroug. Watch the latest videos and follow across every platform." />
+<meta property="og:url" content="https://mazen.gg/" />
+<meta property="og:image" content="https://mazen.gg/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Mazen Dahroug" />
+
+<!-- Twitter / X -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Mazen Dahroug — Content Creator, Streamer &amp; Gamer" />
+<meta name="twitter:description" content="The official home of Mazen Dahroug. Watch the latest videos and follow across every platform." />
+<meta name="twitter:image" content="https://mazen.gg/og.png" />
+<meta name="twitter:site" content="@mazendahroug" />
+<meta name="twitter:creator" content="@mazendahroug" />
+
+<!-- Perf hints for the lazy video embed -->
+<link rel="preconnect" href="https://www.youtube-nocookie.com" />
+<link rel="preconnect" href="https://i.ytimg.com" />
+
+<!-- Favicon (inline SVG monogram) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%2308080c'/%3E%3Ctext x='50' y='68' font-family='Arial,sans-serif' font-size='52' font-weight='700' text-anchor='middle' fill='%237c5cff'%3EMD%3C/text%3E%3C/svg%3E" />
+
+<!-- Structured data: Person + WebSite -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://mazen.gg/#person",
+      "name": "Mazen Dahroug",
+      "url": "https://mazen.gg/",
+      "image": "https://mazen.gg/og.png",
+      "jobTitle": "Content Creator",
+      "description": "Content creator, streamer and gamer.",
+      "email": "info@mazen.gg",
+      "sameAs": [
+        "https://youtube.com/@mazen.dahroug",
+        "https://www.youtube.com/@mazenclips",
+        "https://www.twitch.tv/mazendahroug",
+        "https://www.tiktok.com/@mazen.dahroug",
+        "https://instagram.com/mazen.dahroug",
+        "https://x.com/mazendahroug",
+        "https://discord.gg/sZsRMh8eRJ"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://mazen.gg/#website",
+      "url": "https://mazen.gg/",
+      "name": "Mazen Dahroug",
+      "publisher": { "@id": "https://mazen.gg/#person" }
+    }
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --bg: #08080c;
+    --bg-2: #0d0d15;
+    --card: rgba(255, 255, 255, 0.035);
+    --card-hover: rgba(255, 255, 255, 0.06);
+    --border: rgba(255, 255, 255, 0.09);
+    --border-hover: rgba(255, 255, 255, 0.18);
+    --text: #f5f5fa;
+    --muted: #9b9bb0;
+    --accent: #7c5cff;
+    --accent-2: #22d3ee;
+    --radius: 18px;
+    --maxw: 720px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* Aurora backdrop */
+  .aurora {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .aurora::before,
+  .aurora::after {
+    content: "";
+    position: absolute;
+    width: 60vmax;
+    height: 60vmax;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.45;
+    will-change: transform;
+  }
+  .aurora::before {
+    background: radial-gradient(circle at center, var(--accent), transparent 60%);
+    top: -20vmax;
+    left: -15vmax;
+    animation: drift1 22s var(--ease) infinite alternate;
+  }
+  .aurora::after {
+    background: radial-gradient(circle at center, var(--accent-2), transparent 60%);
+    bottom: -25vmax;
+    right: -15vmax;
+    opacity: 0.3;
+    animation: drift2 26s var(--ease) infinite alternate;
+  }
+  @keyframes drift1 { to { transform: translate(12vmax, 10vmax) scale(1.15); } }
+  @keyframes drift2 { to { transform: translate(-10vmax, -8vmax) scale(1.1); } }
+
+  .wrap {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: clamp(48px, 9vh, 110px) 22px 64px;
+  }
+
+  /* ---- Hero ---- */
+  .hero { text-align: center; }
+
+  .avatar {
+    width: 116px;
+    height: 116px;
+    margin: 0 auto 26px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #fff;
+    background:
+      linear-gradient(var(--bg), var(--bg)) padding-box,
+      linear-gradient(135deg, var(--accent), var(--accent-2)) border-box;
+    border: 3px solid transparent;
+    box-shadow: 0 0 0 6px rgba(124, 92, 255, 0.08), 0 18px 50px -12px rgba(124, 92, 255, 0.5);
+    position: relative;
+  }
+  .avatar span {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  h1 {
+    font-size: clamp(32px, 7vw, 50px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+  }
+
+  .tagline {
+    margin-top: 12px;
+    font-size: clamp(14px, 3.4vw, 17px);
+    font-weight: 600;
+    color: var(--accent-2);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+
+  .bio {
+    margin: 18px auto 0;
+    max-width: 480px;
+    color: var(--muted);
+    font-size: clamp(15px, 3.6vw, 17px);
+  }
+
+  /* quick icon row */
+  .quick {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 26px;
+    flex-wrap: wrap;
+  }
+  .quick a {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    color: var(--muted);
+    background: var(--card);
+    border: 1px solid var(--border);
+    transition: transform 0.25s var(--ease), color 0.25s, border-color 0.25s, background 0.25s;
+  }
+  .quick a:hover {
+    color: #fff;
+    transform: translateY(-3px);
+    border-color: var(--border-hover);
+    background: var(--card-hover);
+  }
+  .quick svg { width: 20px; height: 20px; }
+
+  /* ---- Section heading ---- */
+  .sec { margin-top: clamp(48px, 8vh, 76px); }
+  .sec-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  .sec-head h2 {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .sec-head::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* ---- Featured video ---- */
+  .video-card {
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--bg-2);
+    aspect-ratio: 16 / 9;
+    cursor: pointer;
+  }
+  .video-card .poster {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background:
+      radial-gradient(120% 120% at 30% 20%, rgba(124, 92, 255, 0.35), transparent 55%),
+      radial-gradient(120% 120% at 80% 90%, rgba(34, 211, 238, 0.28), transparent 55%),
+      var(--bg-2);
+    transition: opacity 0.4s var(--ease);
+  }
+  .video-card .play {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 12px 40px -6px rgba(124, 92, 255, 0.7);
+    transition: transform 0.3s var(--ease);
+  }
+  .video-card:hover .play { transform: scale(1.08); }
+  .video-card .play svg { width: 30px; height: 30px; margin-left: 4px; fill: #08080c; }
+  .video-card .label {
+    position: absolute;
+    bottom: 18px;
+    left: 20px;
+    font-weight: 700;
+    font-size: 15px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  }
+  .video-card iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+  /* ---- Links grid ---- */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 540px) { .grid { grid-template-columns: 1fr; } }
+
+  .link {
+    --c: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 17px 18px;
+    border-radius: var(--radius);
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s var(--ease), border-color 0.25s, background 0.25s;
+  }
+  .link::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(140% 120% at 0% 50%, color-mix(in srgb, var(--c) 22%, transparent), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s var(--ease);
+  }
+  .link:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--c) 55%, var(--border));
+    background: var(--card-hover);
+  }
+  .link:hover::before { opacity: 1; }
+  .link:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  .link .ico {
+    width: 44px;
+    height: 44px;
+    flex: none;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: color-mix(in srgb, var(--c) 16%, transparent);
+    color: var(--c);
+    position: relative;
+    z-index: 1;
+  }
+  .link .ico svg { width: 22px; height: 22px; }
+  .link .txt { position: relative; z-index: 1; min-width: 0; }
+  .link .txt .name { font-weight: 700; font-size: 15.5px; }
+  .link .txt .handle { font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .link .arrow {
+    margin-left: auto;
+    position: relative;
+    z-index: 1;
+    color: var(--muted);
+    transition: transform 0.25s var(--ease), color 0.25s;
+  }
+  .link:hover .arrow { color: var(--c); transform: translate(2px, -2px); }
+  .link .arrow svg { width: 16px; height: 16px; }
+
+  /* ---- Contact ---- */
+  .contact {
+    text-align: center;
+    padding: 34px 24px;
+    border-radius: var(--radius);
+    background: var(--card);
+    border: 1px solid var(--border);
+  }
+  .contact h3 { font-size: 20px; font-weight: 700; }
+  .contact p { color: var(--muted); margin: 8px 0 20px; font-size: 15px; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 13px 24px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 15px;
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    box-shadow: 0 14px 38px -10px rgba(124, 92, 255, 0.7);
+    transition: transform 0.25s var(--ease), box-shadow 0.25s;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 18px 46px -8px rgba(124, 92, 255, 0.85); }
+  .btn svg { width: 18px; height: 18px; }
+
+  /* ---- Footer ---- */
+  footer {
+    margin-top: 56px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+  }
+  footer .dot { opacity: 0.5; margin: 0 8px; }
+
+  /* Reveal on scroll — only hidden once JS confirms it can reveal them */
+  .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .aurora::before, .aurora::after { animation: none; }
+    .js .reveal { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="aurora" aria-hidden="true"></div>
+
+<div class="wrap">
+  <!-- ===== HERO ===== -->
+  <header class="hero">
+    <div class="avatar"><span>MD</span></div>
+    <h1>Mazen Dahroug</h1>
+    <p class="tagline">Content Creator · Streamer · Gamer</p>
+    <p class="bio">I make videos and go live across YouTube, Twitch and TikTok. Catch the latest below and follow along wherever you hang out.</p>
+
+    <nav class="quick" aria-label="Social profiles">
+      <a href="https://youtube.com/@mazen.dahroug" target="_blank" rel="me noopener" aria-label="YouTube">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+      </a>
+      <a href="https://www.twitch.tv/mazendahroug" target="_blank" rel="me noopener" aria-label="Twitch">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+      </a>
+      <a href="https://www.tiktok.com/@mazen.dahroug" target="_blank" rel="me noopener" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+      </a>
+      <a href="https://instagram.com/mazen.dahroug" target="_blank" rel="me noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      </a>
+      <a href="https://x.com/mazendahroug" target="_blank" rel="me noopener" aria-label="X (Twitter)">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://discord.gg/sZsRMh8eRJ" target="_blank" rel="noopener" aria-label="Discord">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+      </a>
+    </nav>
+  </header>
+
+  <!-- ===== FEATURED VIDEO ===== -->
+  <section class="sec reveal" aria-labelledby="latest-h">
+    <div class="sec-head"><h2 id="latest-h">Latest Video</h2></div>
+    <div class="video-card" id="video" role="button" tabindex="0" aria-label="Play latest YouTube video">
+      <div class="poster">
+        <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+        <span class="label">▶ Watch my latest upload</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LINKS ===== -->
+  <section class="sec reveal" aria-labelledby="follow-h">
+    <div class="sec-head"><h2 id="follow-h">Find Me Everywhere</h2></div>
+    <div class="grid">
+      <a class="link" style="--c:#ff0000" href="https://youtube.com/@mazen.dahroug" target="_blank" rel="me noopener">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span>
+        <span class="txt"><span class="name">YouTube</span><span class="handle">@mazen.dahroug</span></span>
+        <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+      </a>
+
+      <a class="link" style="--c:#ff4d4d" href="https://www.youtube.com/@mazenclips" target="_blank" rel="me noopener">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span>
+        <span class="txt"><span class="name">MazenClips</span><span class="handle">@mazenclips</span></span>
+        <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+      </a>
+
+      <a class="link" style="--c:#9146ff" href="https://www.twitch.tv/mazendahroug" target="_blank" rel="me noopener">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg></span>
+        <span class="txt"><span class="name">Twitch</span><span class="handle">@mazendahroug</span></span>
+        <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+      </a>
+
+      <a class="link" style="--c:#fe2c55" href="https://www.tiktok.com/@mazen.dahroug" target="_blank" rel="me noopener">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></span>
+        <span class="txt"><span class="name">TikTok</span><span class="handle">@mazen.dahroug</span></span>
+        <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+      </a>
+
+      <a class="link" style="--c:#e1306c" href="https://instagram.com/mazen.dahroug" target="_blank" rel="me noopener">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></span>
+        <span class="txt"><span class="name">Instagram</span><span class="handle">@mazen.dahroug</span></span>
+        <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+      </a>
+
+      <a class="link" style="--c:#e7e9ea" href="https://x.com/mazendahroug" target="_blank" rel="me noopener">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></span>
+        <span class="txt"><span class="name">X (Twitter)</span><span class="handle">@mazendahroug</span></span>
+        <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+      </a>
+
+      <a class="link" style="--c:#5865f2" href="https://discord.gg/sZsRMh8eRJ" target="_blank" rel="noopener">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.37a19.79 19.79 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></span>
+        <span class="txt"><span class="name">Discord</span><span class="handle">Join the server</span></span>
+        <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="sec reveal" aria-labelledby="contact-h">
+    <div class="sec-head"><h2 id="contact-h">Business Inquiries</h2></div>
+    <div class="contact">
+      <h3>Let's work together</h3>
+      <p>Brand deals, collaborations and sponsorships — drop me a line.</p>
+      <a class="btn" href="mailto:info@mazen.gg">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z"/><path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z"/></svg>
+        Get in touch
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>&copy; <span id="year">2026</span> Mazen Dahroug<span class="dot">•</span><a href="https://mazen.gg/" style="color:inherit">mazen.gg</a></p>
+  </footer>
+</div>
+
+<script>
+  // Progressive enhancement: only hide reveal sections once JS is running.
+  document.documentElement.classList.add("js");
+
+  // Pin a specific video by setting FEATURED_VIDEO to a YouTube video ID.
+  // Leave it null to always feature the channel's most recent upload.
+  const FEATURED_VIDEO = null;
+  const UPLOADS_PLAYLIST = "UUJdQoNFiAepDttpdZshzitA"; // auto-latest uploads playlist
+
+  // Current year
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Click-to-load video (keeps page fast; loads only on demand)
+  const card = document.getElementById("video");
+  function loadVideo() {
+    const src = FEATURED_VIDEO
+      ? `https://www.youtube-nocookie.com/embed/${FEATURED_VIDEO}?autoplay=1&rel=0`
+      : `https://www.youtube-nocookie.com/embed/videoseries?list=${UPLOADS_PLAYLIST}&autoplay=1&rel=0`;
+    const f = document.createElement("iframe");
+    f.src = src;
+    f.title = "Latest video by Mazen Dahroug";
+    f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    f.allowFullscreen = true;
+    f.loading = "lazy";
+    card.innerHTML = "";
+    card.appendChild(f);
+    card.style.cursor = "default";
+  }
+  card.addEventListener("click", loadVideo);
+  card.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); loadVideo(); }
+  });
+
+  // Reveal sections as they scroll into view (bulletproof, no IO dependency)
+  const reveals = Array.from(document.querySelectorAll(".reveal"));
+  function revealInView() {
+    const trigger = window.innerHeight * 0.88;
+    for (let i = reveals.length - 1; i >= 0; i--) {
+      if (reveals[i].getBoundingClientRect().top < trigger) {
+        reveals[i].classList.add("in");
+        reveals.splice(i, 1);
+      }
+    }
+  }
+  revealInView();
+  window.addEventListener("scroll", revealInView, { passive: true });
+  window.addEventListener("load", revealInView);
+</script>
+</body>
+</html>
