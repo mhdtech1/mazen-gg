@@ -273,6 +273,8 @@
     transition: opacity 0.4s var(--ease);
   }
   .video-card .play {
+    position: relative;
+    z-index: 2;
     width: 78px;
     height: 78px;
     border-radius: 50%;
@@ -286,11 +288,47 @@
   .video-card .play svg { width: 30px; height: 30px; margin-left: 4px; fill: #08080c; }
   .video-card .label {
     position: absolute;
+    z-index: 2;
     bottom: 18px;
     left: 20px;
+    right: 20px;
     font-weight: 700;
     font-size: 15px;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .video-card .tag {
+    position: absolute;
+    z-index: 2;
+    top: 16px;
+    left: 16px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    border-radius: 999px;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(4px);
+  }
+  /* Real thumbnail layer (set once latest-video.json resolves) */
+  .video-card .poster.has-thumb::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--thumb);
+    background-size: cover;
+    background-position: center;
+  }
+  .video-card .poster.has-thumb::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0.1) 45%, rgba(0,0,0,0.4));
   }
   .video-card iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
@@ -443,9 +481,10 @@
   <section class="sec reveal" aria-labelledby="latest-h">
     <div class="sec-head"><h2 id="latest-h">Latest Video</h2></div>
     <div class="video-card" id="video" role="button" tabindex="0" aria-label="Play latest YouTube video">
-      <div class="poster">
+      <div class="poster" id="poster">
+        <span class="tag" id="vtag" hidden>Latest</span>
         <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
-        <span class="label">▶ Watch my latest upload</span>
+        <span class="label" id="vlabel">▶ Watch my latest upload</span>
       </div>
     </div>
   </section>
@@ -521,19 +560,47 @@
   // Progressive enhancement: only hide reveal sections once JS is running.
   document.documentElement.classList.add("js");
 
-  // Pin a specific video by setting FEATURED_VIDEO to a YouTube video ID.
-  // Leave it null to always feature the channel's most recent upload.
-  const FEATURED_VIDEO = null;
-  const UPLOADS_PLAYLIST = "UUJdQoNFiAepDttpdZshzitA"; // auto-latest uploads playlist
+  // The featured player auto-shows the most recent upload across ALL of Mazen's
+  // channels. latest-video.json is refreshed on a schedule by a GitHub Action
+  // (.github/workflows/latest-video.yml). UPLOADS_PLAYLIST is the main channel's
+  // uploads, used only as a fallback if the JSON can't be read.
+  const UPLOADS_PLAYLIST = "UUJdQoNFiAepDttpdZshzitA";
+  let currentVideoId = null;
 
-  // Current year
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  // Click-to-load video (keeps page fast; loads only on demand)
   const card = document.getElementById("video");
+  const poster = document.getElementById("poster");
+  const vlabel = document.getElementById("vlabel");
+  const vtag = document.getElementById("vtag");
+
+  function setThumb(url) {
+    poster.style.setProperty("--thumb", `url("${url}")`);
+    poster.classList.add("has-thumb");
+  }
+
+  // Resolve the latest video (cross-channel) and dress the poster.
+  fetch("/latest-video.json", { cache: "no-cache" })
+    .then((r) => (r.ok ? r.json() : Promise.reject()))
+    .then((v) => {
+      if (!v || !v.videoId) return;
+      currentVideoId = v.videoId;
+      if (v.title) vlabel.textContent = "▶ " + v.title;
+      if (v.channel) { vtag.textContent = "Latest · " + v.channel; vtag.hidden = false; }
+      // Prefer the crisp 16:9 thumbnail; fall back to the always-present one.
+      const hi = `https://i.ytimg.com/vi/${v.videoId}/maxresdefault.jpg`;
+      const lo = `https://i.ytimg.com/vi/${v.videoId}/mqdefault.jpg`;
+      const probe = new Image();
+      probe.onload = () => setThumb(probe.naturalWidth > 200 ? hi : lo);
+      probe.onerror = () => setThumb(lo);
+      probe.src = hi;
+    })
+    .catch(() => {}); // keep the branded poster + playlist fallback
+
+  // Click-to-load (keeps the page fast; the iframe loads only on demand).
   function loadVideo() {
-    const src = FEATURED_VIDEO
-      ? `https://www.youtube-nocookie.com/embed/${FEATURED_VIDEO}?autoplay=1&rel=0`
+    const src = currentVideoId
+      ? `https://www.youtube-nocookie.com/embed/${currentVideoId}?autoplay=1&rel=0`
       : `https://www.youtube-nocookie.com/embed/videoseries?list=${UPLOADS_PLAYLIST}&autoplay=1&rel=0`;
     const f = document.createElement("iframe");
     f.src = src;
