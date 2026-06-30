@@ -32,9 +32,11 @@
 <meta name="twitter:site" content="@mazendahroug" />
 <meta name="twitter:creator" content="@mazendahroug" />
 
-<!-- Perf hints for the lazy video embed -->
+<!-- Perf hints for the lazy video embed + live check -->
 <link rel="preconnect" href="https://www.youtube-nocookie.com" />
 <link rel="preconnect" href="https://i.ytimg.com" />
+<link rel="preconnect" href="https://decapi.me" />
+<link rel="dns-prefetch" href="https://player.twitch.tv" />
 
 <!-- Icons + PWA manifest -->
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
@@ -61,6 +63,7 @@
         "https://youtube.com/@mazen.dahroug",
         "https://www.youtube.com/@mazenclips",
         "https://www.twitch.tv/mazendahroug",
+        "https://kick.com/mazendahroug",
         "https://www.tiktok.com/@mazen.dahroug",
         "https://instagram.com/mazen.dahroug",
         "https://x.com/mazendahroug",
@@ -315,6 +318,23 @@
     border: 1px solid rgba(255, 255, 255, 0.18);
     backdrop-filter: blur(4px);
   }
+  .video-card .tag.live {
+    background: #ff2d55;
+    border-color: transparent;
+    box-shadow: 0 4px 18px -2px rgba(255, 45, 85, 0.7);
+  }
+  .video-card .tag.live::before {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 7px;
+    border-radius: 50%;
+    background: #fff;
+    vertical-align: middle;
+    animation: livepulse 1.4s ease-in-out infinite;
+  }
+  @keyframes livepulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
   /* Real thumbnail layer (set once latest-video.json resolves) */
   .video-card .poster.has-thumb::before {
     content: "";
@@ -440,6 +460,7 @@
   @media (prefers-reduced-motion: reduce) {
     .aurora::before, .aurora::after { animation: none; }
     .js .reveal { opacity: 1; transform: none; transition: none; }
+    .video-card .tag.live::before { animation: none; }
     html { scroll-behavior: auto; }
   }
 </style>
@@ -461,6 +482,9 @@
       </a>
       <a href="https://www.twitch.tv/mazendahroug" target="_blank" rel="me noopener" aria-label="Twitch">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+      </a>
+      <a href="https://kick.com/mazendahroug" target="_blank" rel="me noopener" aria-label="Kick">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M1.333 0h6.667v5.333h2V2.667h2V0h6.666v8h-2v2.667h-2v2.666h2V16h2v8h-6.666v-2.667h-2v-2.666h-2V24H1.333z"/></svg>
       </a>
       <a href="https://www.tiktok.com/@mazen.dahroug" target="_blank" rel="me noopener" aria-label="TikTok">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
@@ -508,6 +532,12 @@
       <a class="link" style="--c:#9146ff" href="https://www.twitch.tv/mazendahroug" target="_blank" rel="me noopener">
         <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg></span>
         <span class="txt"><span class="name">Twitch</span><span class="handle">@mazendahroug</span></span>
+        <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
+      </a>
+
+      <a class="link" style="--c:#53fc18" href="https://kick.com/mazendahroug" target="_blank" rel="me noopener">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M1.333 0h6.667v5.333h2V2.667h2V0h6.666v8h-2v2.667h-2v2.666h2V16h2v8h-6.666v-2.667h-2v-2.666h-2V24H1.333z"/></svg></span>
+        <span class="txt"><span class="name">Kick</span><span class="handle">@mazendahroug</span></span>
         <span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg></span>
       </a>
 
@@ -565,7 +595,10 @@
   // (.github/workflows/latest-video.yml). UPLOADS_PLAYLIST is the main channel's
   // uploads, used only as a fallback if the JSON can't be read.
   const UPLOADS_PLAYLIST = "UUJdQoNFiAepDttpdZshzitA";
+  const TWITCH = "mazendahroug";
   let currentVideoId = null;
+  let liveEmbed = null;
+  let isLive = false;
 
   document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -573,38 +606,59 @@
   const poster = document.getElementById("poster");
   const vlabel = document.getElementById("vlabel");
   const vtag = document.getElementById("vtag");
+  const sectionHeading = document.getElementById("latest-h");
 
   function setThumb(url) {
     poster.style.setProperty("--thumb", `url("${url}")`);
     poster.classList.add("has-thumb");
   }
 
-  // Resolve the latest video (cross-channel) and dress the poster.
+  // 1) If live on Twitch, the player shows the stream instead of the latest video.
+  //    decapi.me is a no-auth, CORS-enabled Twitch status service.
+  fetch(`https://decapi.me/twitch/uptime/${TWITCH}`, { cache: "no-store" })
+    .then((r) => (r.ok ? r.text() : Promise.reject()))
+    .then((t) => {
+      if (/offline|unable|error|unknown|not found/i.test(t)) return; // not live
+      isLive = true;
+      liveEmbed =
+        `https://player.twitch.tv/?channel=${TWITCH}` +
+        "&parent=mazen.gg&parent=www.mazen.gg&autoplay=true";
+      sectionHeading.textContent = "Live Now";
+      vtag.textContent = "LIVE NOW";
+      vtag.classList.add("live");
+      vtag.hidden = false;
+      vlabel.textContent = "▶ Watch live on Twitch";
+      setThumb(`https://static-cdn.jtvnw.net/previews-ttv/live_user_${TWITCH}-1280x720.jpg`);
+    })
+    .catch(() => {}); // service down -> fall through to latest video
+
+  // 2) Latest video across channels (only dresses the poster when not live).
   fetch("/latest-video.json", { cache: "no-cache" })
     .then((r) => (r.ok ? r.json() : Promise.reject()))
     .then((v) => {
       if (!v || !v.videoId) return;
-      currentVideoId = v.videoId;
+      currentVideoId = v.videoId; // always set so the off-stream click target works
+      if (isLive) return; // a live stream takes priority over the latest video
       if (v.title) vlabel.textContent = "▶ " + v.title;
       if (v.channel) { vtag.textContent = "Latest · " + v.channel; vtag.hidden = false; }
-      // Prefer the crisp 16:9 thumbnail; fall back to the always-present one.
       const hi = `https://i.ytimg.com/vi/${v.videoId}/maxresdefault.jpg`;
       const lo = `https://i.ytimg.com/vi/${v.videoId}/mqdefault.jpg`;
       const probe = new Image();
-      probe.onload = () => setThumb(probe.naturalWidth > 200 ? hi : lo);
-      probe.onerror = () => setThumb(lo);
+      probe.onload = () => { if (!isLive) setThumb(probe.naturalWidth > 200 ? hi : lo); };
+      probe.onerror = () => { if (!isLive) setThumb(lo); };
       probe.src = hi;
     })
-    .catch(() => {}); // keep the branded poster + playlist fallback
+    .catch(() => {});
 
   // Click-to-load (keeps the page fast; the iframe loads only on demand).
   function loadVideo() {
-    const src = currentVideoId
-      ? `https://www.youtube-nocookie.com/embed/${currentVideoId}?autoplay=1&rel=0`
-      : `https://www.youtube-nocookie.com/embed/videoseries?list=${UPLOADS_PLAYLIST}&autoplay=1&rel=0`;
+    let src;
+    if (liveEmbed) src = liveEmbed;
+    else if (currentVideoId) src = `https://www.youtube-nocookie.com/embed/${currentVideoId}?autoplay=1&rel=0`;
+    else src = `https://www.youtube-nocookie.com/embed/videoseries?list=${UPLOADS_PLAYLIST}&autoplay=1&rel=0`;
     const f = document.createElement("iframe");
     f.src = src;
-    f.title = "Latest video by Mazen Dahroug";
+    f.title = isLive ? "Mazen Dahroug — live on Twitch" : "Latest video by Mazen Dahroug";
     f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
     f.allowFullscreen = true;
     f.loading = "lazy";
