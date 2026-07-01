@@ -711,8 +711,8 @@
     }
   }
 
-  function pollLive() {
-    if (document.hidden) return; // skip work in background tabs
+  function pollLive(force) {
+    if (!force && document.hidden) return; // the interval skips background tabs
     detectLive().then((info) => {
       const changed = !!info !== !!liveInfo;
       liveInfo = info;
@@ -737,10 +737,10 @@
     })
     .catch(() => {});
 
-  // Detect live now, then keep polling; also re-check when the tab regains focus.
-  pollLive();
-  setInterval(pollLive, LIVE_POLL_MS);
-  document.addEventListener("visibilitychange", () => { if (!document.hidden) pollLive(); });
+  // Detect live now (always), keep polling while visible, and re-check on focus.
+  pollLive(true);
+  setInterval(() => pollLive(false), LIVE_POLL_MS);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) pollLive(true); });
 
   // Click-to-load (keeps the page fast; the iframe mounts only on demand).
   function loadMedia() {
