@@ -599,9 +599,12 @@
   const UPLOADS_PLAYLIST = "UUJdQoNFiAepDttpdZshzitA";
   const TWITCH = "mazendahroug";
   const KICK = "mazendahroug";
+  const TWITCH_GQL_ID = "kimne78kx3ncx6brgo4mv6wki5h1ko"; // public read-only web Client-ID
+  const LIVE_POLL_MS = 30000; // re-check live status while the page stays open
   let currentVideoId = null;
-  let liveEmbed = null;
-  let isLive = false;
+  let latestMeta = null; // { title, channel, thumb } from latest-video.json
+  let liveInfo = null; // { embed, thumb, label } when live, else null
+  let mediaLoaded = false; // an iframe (stream/video) is currently mounted
 
   document.getElementById("year").textContent = new Date().getFullYear();
 
@@ -616,39 +619,40 @@
     poster.classList.add("has-thumb");
   }
 
-  // ---- Live detection -----------------------------------------------------
-  // If live, the featured player shows the stream instead of the latest video.
-  // Twitch: decapi.me (no-auth, CORS). Kick: the kick.com API via the allorigins
-  // CORS proxy (Kick blocks direct browser requests behind Cloudflare). Twitch
-  // takes priority if live on both. Every check fails safe to "not live".
-  function goLive({ embed, thumb, label }) {
-    if (isLive) return;
-    isLive = true;
-    liveEmbed = embed;
-    sectionHeading.textContent = "Live Now";
-    vtag.textContent = "LIVE NOW";
-    vtag.classList.add("live");
-    vtag.hidden = false;
-    vlabel.textContent = label;
-    if (thumb) setThumb(thumb);
+  // ---- Featured player: live stream when live, else latest video ----------
+  // Twitch status via Twitch's own GQL endpoint (near-instant, CORS-ok) with a
+  // decapi.me fallback. Kick status via the kick.com API through the allorigins
+  // CORS proxy (Kick's Cloudflare blocks direct browser requests). Twitch wins
+  // if both are live. The page polls every LIVE_POLL_MS so it switches shortly
+  // after you go live, no refresh needed. Every check fails safe to "not live".
+  const twitchInfo = {
+    embed: `https://player.twitch.tv/?channel=${TWITCH}&parent=mazen.gg&parent=www.mazen.gg&autoplay=true`,
+    thumb: `https://static-cdn.jtvnw.net/previews-ttv/live_user_${TWITCH}-1280x720.jpg`,
+    label: "▶ Watch live on Twitch",
+  };
+
+  function twitchLive() {
+    return fetch("https://gql.twitch.tv/gql", {
+      method: "POST",
+      headers: { "Client-Id": TWITCH_GQL_ID, "Content-Type": "application/json" },
+      body: JSON.stringify({ query: `{user(login:"${TWITCH}"){stream{type}}}` }),
+      cache: "no-store",
+    })
+      .then((r) => (r.ok ? r.json() : Promise.reject()))
+      .then((d) => {
+        const s = d && d.data && d.data.user && d.data.user.stream;
+        return s && s.type === "live" ? twitchInfo : null;
+      })
+      .catch(() =>
+        // Fallback: decapi.me if GQL is unreachable.
+        fetch(`https://decapi.me/twitch/uptime/${TWITCH}`, { cache: "no-store" })
+          .then((r) => (r.ok ? r.text() : Promise.reject()))
+          .then((t) => (/offline|unable|error|unknown|not found/i.test(t) ? null : twitchInfo))
+          .catch(() => null)
+      );
   }
 
-  function checkTwitch() {
-    return fetch(`https://decapi.me/twitch/uptime/${TWITCH}`, { cache: "no-store" })
-      .then((r) => (r.ok ? r.text() : Promise.reject()))
-      .then((t) =>
-        /offline|unable|error|unknown|not found/i.test(t)
-          ? null
-          : {
-              embed: `https://player.twitch.tv/?channel=${TWITCH}&parent=mazen.gg&parent=www.mazen.gg&autoplay=true`,
-              thumb: `https://static-cdn.jtvnw.net/previews-ttv/live_user_${TWITCH}-1280x720.jpg`,
-              label: "▶ Watch live on Twitch",
-            }
-      )
-      .catch(() => null);
-  }
-
-  function checkKick() {
+  function kickLive() {
     const api = encodeURIComponent(`https://kick.com/api/v2/channels/${KICK}`);
     return fetch(`https://api.allorigins.win/raw?url=${api}`, { cache: "no-store" })
       .then((r) => (r.ok ? r.json() : Promise.reject()))
@@ -657,7 +661,7 @@
         return ls
           ? {
               embed: `https://player.kick.com/${KICK}?autoplay=true`,
-              thumb: ls.thumbnail && ls.thumbnail.url,
+              thumb: (ls.thumbnail && ls.thumbnail.url) || null,
               label: "▶ Watch live on Kick",
             }
           : null;
@@ -665,49 +669,86 @@
       .catch(() => null);
   }
 
-  // Twitch first (fast); only poll Kick's proxy if Twitch is offline.
-  checkTwitch().then((tw) => {
-    if (tw) return goLive(tw);
-    checkKick().then((kk) => { if (kk) goLive(kk); });
-  });
+  function detectLive() {
+    return twitchLive().then((tw) => tw || kickLive());
+  }
 
-  // 2) Latest video across channels (only dresses the poster when not live).
+  function renderPoster() {
+    if (mediaLoaded) return; // don't disturb a player the visitor already opened
+    if (liveInfo) {
+      sectionHeading.textContent = "Live Now";
+      vtag.textContent = "LIVE NOW";
+      vtag.classList.add("live");
+      vtag.hidden = false;
+      vlabel.textContent = liveInfo.label;
+      if (liveInfo.thumb) setThumb(liveInfo.thumb);
+    } else {
+      sectionHeading.textContent = "Latest Video";
+      vtag.classList.remove("live");
+      if (latestMeta) {
+        vtag.textContent = "Latest · " + latestMeta.channel;
+        vtag.hidden = !latestMeta.channel;
+        vlabel.textContent = "▶ " + (latestMeta.title || "Watch my latest upload");
+        if (latestMeta.thumb) setThumb(latestMeta.thumb);
+      } else {
+        vtag.hidden = true;
+        vlabel.textContent = "▶ Watch my latest upload";
+      }
+    }
+  }
+
+  function pollLive() {
+    if (document.hidden) return; // skip work in background tabs
+    detectLive().then((info) => {
+      const changed = !!info !== !!liveInfo;
+      liveInfo = info;
+      if (changed) renderPoster();
+    });
+  }
+
+  // Latest video across channels (shown whenever not live).
   fetch("/latest-video.json", { cache: "no-cache" })
     .then((r) => (r.ok ? r.json() : Promise.reject()))
     .then((v) => {
       if (!v || !v.videoId) return;
-      currentVideoId = v.videoId; // always set so the off-stream click target works
-      if (isLive) return; // a live stream takes priority over the latest video
-      if (v.title) vlabel.textContent = "▶ " + v.title;
-      if (v.channel) { vtag.textContent = "Latest · " + v.channel; vtag.hidden = false; }
+      currentVideoId = v.videoId;
+      latestMeta = { title: v.title || "", channel: v.channel || "", thumb: null };
       const hi = `https://i.ytimg.com/vi/${v.videoId}/maxresdefault.jpg`;
       const lo = `https://i.ytimg.com/vi/${v.videoId}/mqdefault.jpg`;
       const probe = new Image();
-      probe.onload = () => { if (!isLive) setThumb(probe.naturalWidth > 200 ? hi : lo); };
-      probe.onerror = () => { if (!isLive) setThumb(lo); };
+      probe.onload = () => { latestMeta.thumb = probe.naturalWidth > 200 ? hi : lo; renderPoster(); };
+      probe.onerror = () => { latestMeta.thumb = lo; renderPoster(); };
       probe.src = hi;
+      renderPoster();
     })
     .catch(() => {});
 
-  // Click-to-load (keeps the page fast; the iframe loads only on demand).
-  function loadVideo() {
-    let src;
-    if (liveEmbed) src = liveEmbed;
-    else if (currentVideoId) src = `https://www.youtube-nocookie.com/embed/${currentVideoId}?autoplay=1&rel=0`;
-    else src = `https://www.youtube-nocookie.com/embed/videoseries?list=${UPLOADS_PLAYLIST}&autoplay=1&rel=0`;
+  // Detect live now, then keep polling; also re-check when the tab regains focus.
+  pollLive();
+  setInterval(pollLive, LIVE_POLL_MS);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) pollLive(); });
+
+  // Click-to-load (keeps the page fast; the iframe mounts only on demand).
+  function loadMedia() {
+    const src = liveInfo
+      ? liveInfo.embed
+      : currentVideoId
+      ? `https://www.youtube-nocookie.com/embed/${currentVideoId}?autoplay=1&rel=0`
+      : `https://www.youtube-nocookie.com/embed/videoseries?list=${UPLOADS_PLAYLIST}&autoplay=1&rel=0`;
     const f = document.createElement("iframe");
     f.src = src;
-    f.title = isLive ? "Mazen Dahroug — live on Twitch" : "Latest video by Mazen Dahroug";
+    f.title = liveInfo ? "Mazen Dahroug — live stream" : "Latest video by Mazen Dahroug";
     f.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
     f.allowFullscreen = true;
     f.loading = "lazy";
     card.innerHTML = "";
     card.appendChild(f);
     card.style.cursor = "default";
+    mediaLoaded = true;
   }
-  card.addEventListener("click", loadVideo);
+  card.addEventListener("click", loadMedia);
   card.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); loadVideo(); }
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); loadMedia(); }
   });
 
   // Reveal sections as they scroll into view (bulletproof, no IO dependency)
