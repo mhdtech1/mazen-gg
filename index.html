@@ -35,8 +35,10 @@
 <!-- Perf hints for the lazy video embed + live check -->
 <link rel="preconnect" href="https://www.youtube-nocookie.com" />
 <link rel="preconnect" href="https://i.ytimg.com" />
-<link rel="preconnect" href="https://decapi.me" />
-<link rel="preconnect" href="https://api.allorigins.win" />
+<link rel="preconnect" href="https://gql.twitch.tv" />
+<link rel="preconnect" href="https://kick.com" />
+<link rel="dns-prefetch" href="https://decapi.me" />
+<link rel="dns-prefetch" href="https://api.allorigins.win" />
 <link rel="dns-prefetch" href="https://player.twitch.tv" />
 <link rel="dns-prefetch" href="https://player.kick.com" />
 
@@ -621,10 +623,11 @@
 
   // ---- Featured player: live stream when live, else latest video ----------
   // Twitch status via Twitch's own GQL endpoint (near-instant, CORS-ok) with a
-  // decapi.me fallback. Kick status via the kick.com API through the allorigins
-  // CORS proxy (Kick's Cloudflare blocks direct browser requests). Twitch wins
-  // if both are live. The page polls every LIVE_POLL_MS so it switches shortly
-  // after you go live, no refresh needed. Every check fails safe to "not live".
+  // decapi.me fallback. Kick status via a direct browser fetch to the kick.com
+  // API (real browsers pass its Cloudflare and it returns CORS), with allorigins
+  // as a fallback. Twitch wins if both are live. The page polls every
+  // LIVE_POLL_MS so it switches shortly after you go live, no refresh needed.
+  // Every check fails safe to "not live".
   const twitchInfo = {
     embed: `https://player.twitch.tv/?channel=${TWITCH}&parent=mazen.gg&parent=www.mazen.gg&autoplay=true`,
     thumb: `https://static-cdn.jtvnw.net/previews-ttv/live_user_${TWITCH}-1280x720.jpg`,
@@ -653,20 +656,31 @@
   }
 
   function kickLive() {
-    const api = encodeURIComponent(`https://kick.com/api/v2/channels/${KICK}`);
-    return fetch(`https://api.allorigins.win/raw?url=${api}`, { cache: "no-store" })
+    const toInfo = (d) => {
+      const ls = d && d.livestream; // null when offline, object when live
+      return ls
+        ? {
+            embed: `https://player.kick.com/${KICK}?autoplay=true`,
+            thumb: (ls.thumbnail && ls.thumbnail.url) || null,
+            label: "▶ Watch live on Kick",
+          }
+        : null;
+    };
+    // Real browsers pass Kick's Cloudflare and the API sends CORS headers, so
+    // fetch it directly (near-instant, no cache). allorigins is only a fallback
+    // for the rare visitor Kick's Cloudflare challenges.
+    return fetch(`https://kick.com/api/v2/channels/${KICK}`, { cache: "no-store" })
       .then((r) => (r.ok ? r.json() : Promise.reject()))
-      .then((d) => {
-        const ls = d && d.livestream; // null when offline, object when live
-        return ls
-          ? {
-              embed: `https://player.kick.com/${KICK}?autoplay=true`,
-              thumb: (ls.thumbnail && ls.thumbnail.url) || null,
-              label: "▶ Watch live on Kick",
-            }
-          : null;
-      })
-      .catch(() => null);
+      .then(toInfo)
+      .catch(() =>
+        fetch(
+          `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://kick.com/api/v2/channels/${KICK}`)}`,
+          { cache: "no-store" }
+        )
+          .then((r) => (r.ok ? r.json() : Promise.reject()))
+          .then(toInfo)
+          .catch(() => null)
+      );
   }
 
   function detectLive() {
