@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#08080c" />
+
+<title>Mazen Dahroug — Media Kit</title>
+<meta name="description" content="Media kit for Mazen Dahroug — content creator and streamer. Live audience reach across YouTube, Twitch, TikTok, Instagram and X, plus collaboration info." />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<link rel="canonical" href="https://mazen.gg/media-kit/" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Mazen Dahroug" />
+<meta property="og:title" content="Mazen Dahroug — Media Kit" />
+<meta property="og:description" content="Live audience reach across every platform, plus collaboration info." />
+<meta property="og:url" content="https://mazen.gg/media-kit/" />
+<meta property="og:image" content="https://mazen.gg/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Mazen Dahroug — Media Kit" />
+<meta name="twitter:image" content="https://mazen.gg/og.png" />
+<meta name="twitter:site" content="@mazendahroug" />
+
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+<style>
+  :root {
+    --bg: #08080c;
+    --bg-2: #0d0d15;
+    --card: rgba(255, 255, 255, 0.035);
+    --card-hover: rgba(255, 255, 255, 0.06);
+    --border: rgba(255, 255, 255, 0.09);
+    --border-hover: rgba(255, 255, 255, 0.18);
+    --text: #f5f5fa;
+    --muted: #9b9bb0;
+    --accent: #7c5cff;
+    --accent-2: #22d3ee;
+    --radius: 18px;
+    --maxw: 940px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+  .aurora { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+  .aurora::before, .aurora::after {
+    content: ""; position: absolute; width: 60vmax; height: 60vmax; border-radius: 50%;
+    filter: blur(90px); opacity: 0.4; will-change: transform;
+  }
+  .aurora::before { background: radial-gradient(circle at center, var(--accent), transparent 60%); top: -22vmax; left: -15vmax; animation: drift1 22s var(--ease) infinite alternate; }
+  .aurora::after { background: radial-gradient(circle at center, var(--accent-2), transparent 60%); bottom: -25vmax; right: -15vmax; opacity: 0.28; animation: drift2 26s var(--ease) infinite alternate; }
+  @keyframes drift1 { to { transform: translate(12vmax, 10vmax) scale(1.15); } }
+  @keyframes drift2 { to { transform: translate(-10vmax, -8vmax) scale(1.1); } }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: clamp(40px, 8vh, 90px) 22px 60px; }
+
+  .eyebrow {
+    display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--accent-2);
+    padding: 6px 14px; border: 1px solid var(--border); border-radius: 999px; background: var(--card);
+  }
+
+  /* Hero */
+  .hero { text-align: center; }
+  .avatar {
+    width: 104px; height: 104px; margin: 22px auto 22px; border-radius: 50%;
+    display: grid; place-items: center; font-size: 38px; font-weight: 800; letter-spacing: 1px;
+    background: linear-gradient(var(--bg), var(--bg)) padding-box, linear-gradient(135deg, var(--accent), var(--accent-2)) border-box;
+    border: 3px solid transparent; box-shadow: 0 0 0 6px rgba(124, 92, 255, 0.08), 0 18px 50px -12px rgba(124, 92, 255, 0.5);
+  }
+  .avatar span { background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  h1 { font-size: clamp(34px, 7vw, 56px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.04; }
+  .tagline { margin-top: 12px; font-size: clamp(14px, 3.4vw, 17px); font-weight: 600; color: var(--accent-2); text-transform: uppercase; letter-spacing: 0.14em; }
+  .bio { margin: 18px auto 0; max-width: 560px; color: var(--muted); font-size: clamp(15px, 3.6vw, 17px); }
+
+  /* Combined reach band */
+  .reach {
+    margin-top: clamp(40px, 7vh, 64px); text-align: center; padding: 40px 24px;
+    border-radius: 24px; border: 1px solid var(--border);
+    background: radial-gradient(120% 140% at 50% 0%, rgba(124,92,255,0.18), transparent 60%), var(--card);
+  }
+  .reach .num {
+    font-size: clamp(52px, 12vw, 92px); font-weight: 800; letter-spacing: -0.03em; line-height: 1;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .reach .lbl { margin-top: 12px; font-size: 13px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+
+  /* Section heading */
+  .sec { margin-top: clamp(44px, 7vh, 68px); }
+  .sec-head { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .sec-head h2 { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted); white-space: nowrap; }
+  .sec-head::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border), transparent); }
+
+  /* Platform grid */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+  .plat {
+    --c: var(--accent); display: flex; flex-direction: column; gap: 14px; padding: 20px;
+    border-radius: var(--radius); background: var(--card); border: 1px solid var(--border);
+    text-decoration: none; color: var(--text); position: relative; overflow: hidden;
+    transition: transform 0.25s var(--ease), border-color 0.25s, background 0.25s;
+  }
+  .plat::before { content: ""; position: absolute; inset: 0; background: radial-gradient(120% 100% at 0% 0%, color-mix(in srgb, var(--c) 20%, transparent), transparent 60%); opacity: 0; transition: opacity 0.3s var(--ease); }
+  .plat:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--c) 55%, var(--border)); background: var(--card-hover); }
+  .plat:hover::before { opacity: 1; }
+  .plat .top { display: flex; align-items: center; gap: 12px; position: relative; z-index: 1; }
+  .plat .ico { width: 42px; height: 42px; flex: none; border-radius: 12px; display: grid; place-items: center; background: color-mix(in srgb, var(--c) 16%, transparent); color: var(--c); }
+  .plat .ico svg { width: 22px; height: 22px; }
+  .plat .who .name { font-weight: 700; font-size: 15px; }
+  .plat .who .handle { font-size: 12.5px; color: var(--muted); }
+  .plat .stat { position: relative; z-index: 1; }
+  .plat .stat .v { font-size: 30px; font-weight: 800; letter-spacing: -0.02em; }
+  .plat .stat .m { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 2px; }
+
+  /* Highlights */
+  .highlights { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+  .hl { padding: 22px 20px; border-radius: var(--radius); background: var(--card); border: 1px solid var(--border); text-align: center; }
+  .hl .v { font-size: 30px; font-weight: 800; letter-spacing: -0.02em; }
+  .hl .m { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+
+  /* Work with me */
+  .cta { text-align: center; padding: 40px 26px; border-radius: 24px; background: var(--card); border: 1px solid var(--border); }
+  .cta h3 { font-size: clamp(22px, 5vw, 30px); font-weight: 800; letter-spacing: -0.01em; }
+  .cta p { color: var(--muted); margin: 12px auto 0; max-width: 520px; font-size: 15.5px; }
+  .services { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 22px 0 26px; }
+  .services span { font-size: 13px; font-weight: 600; color: var(--text); padding: 8px 14px; border-radius: 999px; background: rgba(255,255,255,0.05); border: 1px solid var(--border); }
+  .btn { display: inline-flex; align-items: center; gap: 9px; padding: 14px 26px; border-radius: 999px; font-weight: 700; font-size: 15px; text-decoration: none; color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent-2)); box-shadow: 0 14px 38px -10px rgba(124, 92, 255, 0.7); transition: transform 0.25s var(--ease), box-shadow 0.25s; }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 18px 46px -8px rgba(124, 92, 255, 0.85); }
+  .btn svg { width: 18px; height: 18px; }
+
+  footer { margin-top: 54px; text-align: center; color: var(--muted); font-size: 13px; }
+  footer a { color: inherit; }
+  footer .dot { opacity: 0.5; margin: 0 8px; }
+  .updated { margin-top: 6px; font-size: 12px; opacity: 0.7; }
+
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .aurora::before, .aurora::after { animation: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="aurora" aria-hidden="true"></div>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="eyebrow">Media Kit</span>
+    <div class="avatar"><span>MD</span></div>
+    <h1>Mazen Dahroug</h1>
+    <p class="tagline">Content Creator · Streamer · Technology</p>
+    <p class="bio">I create videos and go live across YouTube, Twitch, TikTok and more — building an engaged, multi-platform audience. Here's a live snapshot of that reach.</p>
+  </header>
+
+  <!-- Combined reach -->
+  <section class="reach reveal" aria-label="Combined reach">
+    <div class="num" id="reach-num">—</div>
+    <div class="lbl">Combined audience across platforms</div>
+  </section>
+
+  <!-- Platform breakdown -->
+  <section class="sec reveal" aria-labelledby="aud-h">
+    <div class="sec-head"><h2 id="aud-h">Audience by platform</h2></div>
+    <div class="grid" id="platforms"><!-- rendered from stats.json --></div>
+  </section>
+
+  <!-- Engagement highlights -->
+  <section class="sec reveal" aria-labelledby="eng-h">
+    <div class="sec-head"><h2 id="eng-h">At a glance</h2></div>
+    <div class="highlights">
+      <div class="hl"><div class="v" id="hl-platforms">—</div><div class="m">Platforms</div></div>
+      <div class="hl"><div class="v" id="hl-likes">—</div><div class="m">TikTok likes</div></div>
+      <div class="hl"><div class="v" id="hl-videos">—</div><div class="m">TikTok videos</div></div>
+      <div class="hl"><div class="v" id="hl-reach">—</div><div class="m">Total reach</div></div>
+    </div>
+  </section>
+
+  <!-- Work with me -->
+  <section class="sec reveal" aria-labelledby="cta-h">
+    <div class="sec-head"><h2 id="cta-h">Work with me</h2></div>
+    <div class="cta">
+      <h3>Let's build something together</h3>
+      <p>Open to brand deals, sponsored content, product integrations, stream sponsorships and long-term partnerships across all platforms.</p>
+      <div class="services">
+        <span>Sponsored videos</span><span>Brand integrations</span><span>Live stream sponsorships</span><span>Product reviews</span><span>Giveaways</span>
+      </div>
+      <a class="btn" href="mailto:info@mazen.gg?subject=Collaboration%20%E2%80%94%20Mazen%20Dahroug">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z"/><path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z"/></svg>
+        info@mazen.gg
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; <span id="year">2026</span> Mazen Dahroug<span class="dot">•</span><a href="/">mazen.gg</a></p>
+    <p class="updated">Audience figures auto-updated <span id="updated">recently</span>.</p>
+  </footer>
+</div>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Brand accent + inline icon per platform key.
+  const ICONS = {
+    youtube: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>',
+    twitch: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>',
+    tiktok: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>',
+    instagram: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>',
+    x: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>',
+  };
+  const COLORS = { youtube: "#ff0000", mazenclips: "#ff4d4d", twitch: "#9146ff", tiktok: "#fe2c55", instagram: "#e1306c", x: "#e7e9ea" };
+  const iconFor = (k) => ICONS[k] || (k === "mazenclips" ? ICONS.youtube : ICONS.youtube);
+
+  const fmt = (n) => (n == null ? "—" : n.toLocaleString("en-US"));
+
+  fetch("/media-kit/stats.json", { cache: "no-cache" })
+    .then((r) => (r.ok ? r.json() : Promise.reject()))
+    .then((d) => {
+      const p = d.platforms || {};
+      // Platform cards
+      const grid = document.getElementById("platforms");
+      grid.innerHTML = Object.entries(p).map(([key, x]) => {
+        const c = COLORS[key] || "#7c5cff";
+        return `<a class="plat" style="--c:${c}" href="${x.url}" target="_blank" rel="me noopener">
+          <div class="top">
+            <span class="ico">${iconFor(key)}</span>
+            <span class="who"><span class="name">${x.label}</span><span class="handle">${x.handle}</span></span>
+          </div>
+          <div class="stat"><div class="v">${fmt(x.value)}</div><div class="m">${x.metric}</div></div>
+        </a>`;
+      }).join("");
+
+      // Combined reach + highlights
+      const vals = Object.values(p).map((x) => x.value).filter((v) => typeof v === "number");
+      const reach = vals.reduce((a, b) => a + b, 0);
+      document.getElementById("reach-num").textContent = fmt(reach);
+      document.getElementById("hl-reach").textContent = fmt(reach);
+      document.getElementById("hl-platforms").textContent = Object.keys(p).length;
+      const tt = p.tiktok || {};
+      document.getElementById("hl-likes").textContent = fmt(tt.likes ?? null);
+      document.getElementById("hl-videos").textContent = fmt(tt.videos ?? null);
+
+      if (d.syncedAt) {
+        const dt = new Date(d.syncedAt);
+        document.getElementById("updated").textContent = dt.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+      }
+    })
+    .catch(() => {});
+
+  // Reveal on scroll
+  const reveals = Array.from(document.querySelectorAll(".reveal"));
+  function revealInView() {
+    const t = window.innerHeight * 0.9;
+    for (let i = reveals.length - 1; i >= 0; i--) {
+      if (reveals[i].getBoundingClientRect().top < t) { reveals[i].classList.add("in"); reveals.splice(i, 1); }
+    }
+  }
+  revealInView();
+  window.addEventListener("scroll", revealInView, { passive: true });
+  window.addEventListener("load", revealInView);
+</script>
+</body>
+</html>

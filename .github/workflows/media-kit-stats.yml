@@ -1,0 +1,35 @@
+name: Refresh media kit stats
+
+on:
+  schedule:
+    - cron: "37 6 * * *" # daily
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: media-kit-stats
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Sync audience stats
+        run: node scripts/update-media-kit-stats.mjs
+      - name: Commit if changed
+        run: |
+          if [[ -n "$(git status --porcelain media-kit/stats.json)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add media-kit/stats.json
+            git commit -m "chore: refresh media kit stats"
+            git push
+          else
+            echo "No change."
+          fi

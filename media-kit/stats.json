@@ -1,0 +1,52 @@
+{
+  "syncedAt": "2026-07-06T20:56:51.070Z",
+  "platforms": {
+    "youtube": {
+      "label": "YouTube",
+      "handle": "@mazen.dahroug",
+      "url": "https://youtube.com/@mazen.dahroug",
+      "metric": "subscribers",
+      "channelId": "UCJdQoNFiAepDttpdZshzitA",
+      "value": 36
+    },
+    "mazenclips": {
+      "label": "MazenClips",
+      "handle": "@mazenclips",
+      "url": "https://www.youtube.com/@mazenclips",
+      "metric": "subscribers",
+      "channelId": "UC_E0yKfC8I5MEjGsjKob-UQ",
+      "value": 75
+    },
+    "twitch": {
+      "label": "Twitch",
+      "handle": "@mazendahroug",
+      "url": "https://www.twitch.tv/mazendahroug",
+      "metric": "followers",
+      "value": 557
+    },
+    "tiktok": {
+      "label": "TikTok",
+      "handle": "@mazen.dahroug",
+      "url": "https://www.tiktok.com/@mazen.dahroug",
+      "metric": "followers",
+      "value": 1726,
+      "likes": 8433,
+      "videos": 70
+    },
+    "instagram": {
+      "label": "Instagram",
+      "handle": "@mazen.dahroug",
+      "url": "https://instagram.com/mazen.dahroug",
+      "metric": "followers",
+      "value": 2189
+    },
+    "x": {
+      "label": "X (Twitter)",
+      "handle": "@mazendahroug",
+      "url": "https://x.com/mazendahroug",
+      "metric": "followers",
+      "manual": true,
+      "value": null
+    }
+  }
+}
