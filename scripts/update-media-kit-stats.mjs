@@ -17,7 +17,8 @@ const MANUAL_X_FOLLOWERS = null;
 // Monthly views / total reach is private analytics on every platform (only
 // visible in your creator dashboards), so it can't be auto-fetched. Enter your
 // combined monthly views here to show it on the media kit; null hides it.
-const MONTHLY_VIEWS = null;
+// Pulled 2026-07 from creator dashboards (28-day views): TikTok 8,300 + YouTube 274.
+const MONTHLY_VIEWS = 8574;
 
 const CONFIG = {
   youtube:    { label: "YouTube",     handle: "@mazen.dahroug", url: "https://youtube.com/@mazen.dahroug",       metric: "subscribers", channelId: "UCJdQoNFiAepDttpdZshzitA" },
