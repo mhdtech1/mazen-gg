@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-07-07T19:21:01.207Z",
+  "syncedAt": "2026-07-07T20:06:51.320Z",
   "platforms": {
     "youtube": {
       "label": "YouTube",
@@ -32,6 +32,15 @@
       "value": 1726,
       "likes": 8432,
       "videos": 70
+    },
+    "md3doym": {
+      "label": "TikTok",
+      "handle": "@md3doym",
+      "url": "https://www.tiktok.com/@md3doym",
+      "metric": "followers",
+      "value": 142,
+      "likes": 6388,
+      "videos": 64
     },
     "instagram": {
       "label": "Instagram",

@@ -19,6 +19,7 @@ const CONFIG = {
   mazenclips: { label: "MazenClips",  handle: "@mazenclips",    url: "https://www.youtube.com/@mazenclips",      metric: "subscribers", channelId: "UC_E0yKfC8I5MEjGsjKob-UQ" },
   twitch:     { label: "Twitch",      handle: "@mazendahroug",  url: "https://www.twitch.tv/mazendahroug",       metric: "followers" },
   tiktok:     { label: "TikTok",      handle: "@mazen.dahroug", url: "https://www.tiktok.com/@mazen.dahroug",    metric: "followers" },
+  md3doym:    { label: "TikTok",      handle: "@md3doym",       url: "https://www.tiktok.com/@md3doym",          metric: "followers" },
   instagram:  { label: "Instagram",   handle: "@mazen.dahroug", url: "https://instagram.com/mazen.dahroug",      metric: "followers" },
   x:          { label: "X (Twitter)", handle: "@mazendahroug",  url: "https://x.com/mazendahroug",               metric: "followers" },
 };
@@ -60,8 +61,8 @@ async function twitchFollowers() {
   return n;
 }
 
-async function tiktokStats() {
-  const html = await (await fetch("https://www.tiktok.com/@mazen.dahroug", { headers: { "user-agent": UA } })).text();
+async function tiktokStats(username) {
+  const html = await (await fetch(`https://www.tiktok.com/@${username}`, { headers: { "user-agent": UA } })).text();
   const g = (re) => { const m = html.match(re); return m ? parseInt(m[1], 10) : null; };
   const value = g(/"followerCount":(\d+)/);
   if (value == null) throw new Error("tiktok: followers not found");
@@ -120,11 +121,12 @@ for (const [key, cfg] of Object.entries(CONFIG)) {
 
 const safe = (fn) => fn().then((v) => v, (e) => { console.error("skip:", e.message); return null; });
 
-const [ytMain, ytClips, tw, tt, ig, x] = await Promise.all([
+const [ytMain, ytClips, tw, tt, tt2, ig, x] = await Promise.all([
   safe(() => ytSubs(CONFIG.youtube.channelId, CONFIG.youtube.handle)),
   safe(() => ytSubs(CONFIG.mazenclips.channelId, CONFIG.mazenclips.handle)),
   safe(twitchFollowers),
-  safe(tiktokStats),
+  safe(() => tiktokStats("mazen.dahroug")),
+  safe(() => tiktokStats("md3doym")),
   safe(igFollowers),
   safe(xFollowers),
 ]);
@@ -136,6 +138,11 @@ if (tt) {
   platforms.tiktok.value = tt.value;
   if (tt.likes != null) platforms.tiktok.likes = tt.likes;
   if (tt.videos != null) platforms.tiktok.videos = tt.videos;
+}
+if (tt2) {
+  platforms.md3doym.value = tt2.value;
+  if (tt2.likes != null) platforms.md3doym.likes = tt2.likes;
+  if (tt2.videos != null) platforms.md3doym.videos = tt2.videos;
 }
 if (ig != null) platforms.instagram.value = ig;
 if (x != null) platforms.x.value = x;
