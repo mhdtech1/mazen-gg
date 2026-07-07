@@ -181,6 +181,7 @@
   <section class="sec reveal" aria-labelledby="eng-h">
     <div class="sec-head"><h2 id="eng-h">At a glance</h2></div>
     <div class="highlights">
+      <div class="hl" id="hl-monthly-tile" hidden><div class="v" id="hl-monthly">—</div><div class="m">Monthly views</div></div>
       <div class="hl"><div class="v" id="hl-platforms">—</div><div class="m">Platforms</div></div>
       <div class="hl"><div class="v" id="hl-likes">—</div><div class="m">TikTok likes</div></div>
       <div class="hl"><div class="v" id="hl-videos">—</div><div class="m">TikTok videos</div></div>
@@ -250,6 +251,11 @@
       document.getElementById("reach-num").textContent = fmt(reach);
       document.getElementById("hl-reach").textContent = fmt(reach);
       document.getElementById("hl-platforms").textContent = Object.keys(p).length;
+
+      if (d.monthlyViews != null) {
+        document.getElementById("hl-monthly").textContent = fmt(d.monthlyViews);
+        document.getElementById("hl-monthly-tile").hidden = false;
+      }
       const tt = p.tiktok || {}, tt2 = p.md3doym || {};
       const likes = (tt.likes || 0) + (tt2.likes || 0);
       const vids = (tt.videos || 0) + (tt2.videos || 0);

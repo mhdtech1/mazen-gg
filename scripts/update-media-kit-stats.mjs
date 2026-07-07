@@ -14,6 +14,11 @@ const IG_APP_ID = "936619743392459";
 // set a number here to force it, or leave null to use the live value.
 const MANUAL_X_FOLLOWERS = null;
 
+// Monthly views / total reach is private analytics on every platform (only
+// visible in your creator dashboards), so it can't be auto-fetched. Enter your
+// combined monthly views here to show it on the media kit; null hides it.
+const MONTHLY_VIEWS = null;
+
 const CONFIG = {
   youtube:    { label: "YouTube",     handle: "@mazen.dahroug", url: "https://youtube.com/@mazen.dahroug",       metric: "subscribers", channelId: "UCJdQoNFiAepDttpdZshzitA" },
   mazenclips: { label: "MazenClips",  handle: "@mazenclips",    url: "https://www.youtube.com/@mazenclips",      metric: "subscribers", channelId: "UC_E0yKfC8I5MEjGsjKob-UQ" },
@@ -148,7 +153,7 @@ if (ig != null) platforms.instagram.value = ig;
 if (x != null) platforms.x.value = x;
 if (MANUAL_X_FOLLOWERS != null) platforms.x.value = MANUAL_X_FOLLOWERS;
 
-const out = { syncedAt: new Date().toISOString(), platforms };
+const out = { syncedAt: new Date().toISOString(), monthlyViews: MONTHLY_VIEWS, platforms };
 await writeFile(new URL("../media-kit/stats.json", import.meta.url), JSON.stringify(out, null, 2) + "\n");
 
 const summary = Object.entries(platforms).map(([k, p]) => `${k}=${p.value}`).join(" ");
