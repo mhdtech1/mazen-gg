@@ -10,7 +10,8 @@ const UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36";
 const IG_APP_ID = "936619743392459";
 
-// X / Twitter has no free public follower source — set it here by hand.
+// X / Twitter auto-syncs via the fxtwitter API. Optional manual override:
+// set a number here to force it, or leave null to use the live value.
 const MANUAL_X_FOLLOWERS = null;
 
 const CONFIG = {
@@ -19,7 +20,7 @@ const CONFIG = {
   twitch:     { label: "Twitch",      handle: "@mazendahroug",  url: "https://www.twitch.tv/mazendahroug",       metric: "followers" },
   tiktok:     { label: "TikTok",      handle: "@mazen.dahroug", url: "https://www.tiktok.com/@mazen.dahroug",    metric: "followers" },
   instagram:  { label: "Instagram",   handle: "@mazen.dahroug", url: "https://instagram.com/mazen.dahroug",      metric: "followers" },
-  x:          { label: "X (Twitter)", handle: "@mazendahroug",  url: "https://x.com/mazendahroug",               metric: "followers", manual: true },
+  x:          { label: "X (Twitter)", handle: "@mazendahroug",  url: "https://x.com/mazendahroug",               metric: "followers" },
 };
 
 function parseCount(s) {
@@ -67,6 +68,18 @@ async function tiktokStats() {
   return { value, likes: g(/"heartCount":(\d+)/), videos: g(/"videoCount":(\d+)/) };
 }
 
+async function xFollowers() {
+  // fxtwitter mirrors public X profile data with no auth; vxtwitter is a backup.
+  for (const url of ["https://api.fxtwitter.com/mazendahroug", "https://api.vxtwitter.com/mazendahroug"]) {
+    try {
+      const d = await (await fetch(url, { headers: { "user-agent": UA } })).json();
+      const n = d?.user?.followers ?? d?.followers_count;
+      if (n != null) return n;
+    } catch {}
+  }
+  throw new Error("x: count missing");
+}
+
 async function igFollowers() {
   let last = "";
   for (let i = 0; i < 3; i++) {
@@ -107,12 +120,13 @@ for (const [key, cfg] of Object.entries(CONFIG)) {
 
 const safe = (fn) => fn().then((v) => v, (e) => { console.error("skip:", e.message); return null; });
 
-const [ytMain, ytClips, tw, tt, ig] = await Promise.all([
+const [ytMain, ytClips, tw, tt, ig, x] = await Promise.all([
   safe(() => ytSubs(CONFIG.youtube.channelId, CONFIG.youtube.handle)),
   safe(() => ytSubs(CONFIG.mazenclips.channelId, CONFIG.mazenclips.handle)),
   safe(twitchFollowers),
   safe(tiktokStats),
   safe(igFollowers),
+  safe(xFollowers),
 ]);
 
 if (ytMain != null) platforms.youtube.value = ytMain;
@@ -124,7 +138,8 @@ if (tt) {
   if (tt.videos != null) platforms.tiktok.videos = tt.videos;
 }
 if (ig != null) platforms.instagram.value = ig;
-platforms.x.value = MANUAL_X_FOLLOWERS != null ? MANUAL_X_FOLLOWERS : prev.platforms?.x?.value ?? null;
+if (x != null) platforms.x.value = x;
+if (MANUAL_X_FOLLOWERS != null) platforms.x.value = MANUAL_X_FOLLOWERS;
 
 const out = { syncedAt: new Date().toISOString(), platforms };
 await writeFile(new URL("../media-kit/stats.json", import.meta.url), JSON.stringify(out, null, 2) + "\n");

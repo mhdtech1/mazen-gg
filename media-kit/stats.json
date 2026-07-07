@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-07-07T10:07:48.004Z",
+  "syncedAt": "2026-07-07T19:21:01.207Z",
   "platforms": {
     "youtube": {
       "label": "YouTube",
@@ -30,7 +30,7 @@
       "url": "https://www.tiktok.com/@mazen.dahroug",
       "metric": "followers",
       "value": 1726,
-      "likes": 8434,
+      "likes": 8432,
       "videos": 70
     },
     "instagram": {
@@ -45,8 +45,7 @@
       "handle": "@mazendahroug",
       "url": "https://x.com/mazendahroug",
       "metric": "followers",
-      "manual": true,
-      "value": null
+      "value": 300
     }
   }
 }
