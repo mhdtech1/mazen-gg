@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-07-19T08:55:41.039Z",
+  "syncedAt": "2026-07-20T09:43:04.682Z",
   "monthlyViews": 8873,
   "platforms": {
     "youtube": {
@@ -30,7 +30,7 @@
       "handle": "@mazen.dahroug",
       "url": "https://www.tiktok.com/@mazen.dahroug",
       "metric": "followers",
-      "value": 1724,
+      "value": 1723,
       "likes": 8441,
       "videos": 70
     },
@@ -40,7 +40,7 @@
       "url": "https://www.tiktok.com/@md3doym",
       "metric": "followers",
       "value": 144,
-      "likes": 6463,
+      "likes": 6465,
       "videos": 68
     },
     "instagram": {
@@ -55,7 +55,7 @@
       "handle": "@mazendahroug",
       "url": "https://x.com/mazendahroug",
       "metric": "followers",
-      "value": 298
+      "value": 299
     }
   }
 }
