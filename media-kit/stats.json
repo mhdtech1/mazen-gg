@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-08-10T08:14:47.461Z",
+  "syncedAt": "2026-08-11T07:47:49.640Z",
   "monthlyViews": 8873,
   "platforms": {
     "youtube": {
@@ -16,7 +16,7 @@
       "url": "https://www.youtube.com/@mazenclips",
       "metric": "subscribers",
       "channelId": "UC_E0yKfC8I5MEjGsjKob-UQ",
-      "value": 82
+      "value": 83
     },
     "twitch": {
       "label": "Twitch",
@@ -31,17 +31,17 @@
       "url": "https://www.tiktok.com/@mazen.dahroug",
       "metric": "followers",
       "value": 1721,
-      "likes": 8450,
-      "videos": 74
+      "likes": 8457,
+      "videos": 75
     },
     "md3doym": {
       "label": "TikTok",
       "handle": "@md3doym",
       "url": "https://www.tiktok.com/@md3doym",
       "metric": "followers",
-      "value": 143,
-      "likes": 6532,
-      "videos": 70
+      "value": 144,
+      "likes": 6541,
+      "videos": 71
     },
     "instagram": {
       "label": "Instagram",
