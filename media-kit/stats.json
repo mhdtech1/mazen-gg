@@ -1,5 +1,5 @@
 {
-  "syncedAt": "2026-08-26T07:28:05.746Z",
+  "syncedAt": "2026-08-27T17:52:10.026Z",
   "monthlyViews": 8873,
   "platforms": {
     "youtube": {
@@ -32,7 +32,7 @@
       "metric": "followers",
       "value": 1723,
       "likes": 8499,
-      "videos": 75
+      "videos": 73
     },
     "md3doym": {
       "label": "TikTok",
@@ -55,7 +55,7 @@
       "handle": "@mazendahroug",
       "url": "https://x.com/mazendahroug",
       "metric": "followers",
-      "value": 295
+      "value": 294
     }
   }
 }
